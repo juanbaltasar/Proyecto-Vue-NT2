@@ -1,0 +1,91 @@
+<template>
+  <div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div>
+        <router-link to="/">
+          <a class="navbar-brand title" href="#">Ecommerce</a>
+        </router-link> 
+
+        <a role="button" class="navbar-burger burger" @click="isMenuOpen = !isMenuOpen" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu is-active">
+        <!-- <div class="navbar-start">
+          <div class="navbar-item field">
+            <VmSearch></VmSearch>
+          </div>
+        </div> -->
+        
+        <div class="navbar-end">
+          <!-- <div class="navbar-item shopping-cart" @click="showCheckoutModal">
+            <span class="icon">
+              <i class="fa fa-shopping-cart"></i>
+            </span>
+            <span :class="[numProductsAdded > 0 ? 'tag is-info' : '']">{{ numProductsAdded }}</span>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="navbar-end is-hidden-mobile">
+        <Menu></Menu>
+      </div>
+    </nav>
+  </div>
+</template>
+
+<script>
+  import Menu from './Menu';
+  // import VmSearch from '../search/Search';
+
+  export default {
+    name: 'Header',
+
+    data () {
+      return {
+        // linkedinTooltip: 'Follow us on Linkedin',
+        // facebookTooltip: 'Follow us on Facebook',
+        // twitterTooltip: 'Follow us on Twitter',
+        // instagramTooltip: 'Follow us on Instagram',
+        isCheckoutActive: false,
+        isMenuOpen: false
+      }
+    },
+
+    components: {
+      // VmSearch,
+      Menu
+    },
+
+    computed: {
+      // numProductsAdded () {
+      //   return this.$store.getters.productsAdded.length;
+      // }
+    },
+
+    methods: {
+      // showCheckoutModal () {
+      //   this.$store.commit('showCheckoutModal', true);
+      // }
+    }
+  };
+</script>
+
+<style lang="scss" scoped>
+  .title {
+    color: black;
+    font-size: 28px;
+  }
+  .shopping-cart {
+    cursor: pointer;
+  }
+  a {
+    color: grey;
+  }
+  .navbar{
+    background-color: rgb(0, 210, 190);
+  }
+</style>

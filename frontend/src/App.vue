@@ -1,20 +1,23 @@
 <template>
-    <div>
-      <h1> Lista de Productos </h1>
-      <ProductoLista /> 
-    </div>
+  <div>
+      <main id="app" class="container-fluid mt-3">
+        <Header />
+        <router-view />
+      </main>
+  </div>
 </template>
 
 <script>
-import ProductoLista from './components/producto-lista.vue'
+import Header from '@/components/Header'
 
 export default {
   name: 'App',
   components: {
-    ProductoLista
+    Header
   }
 }
 </script>
+
 
 <style>
 #app {
@@ -26,4 +29,38 @@ export default {
   background: rgb(225, 225, 225);
   padding: 0%;
 }
+
+.el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
+  
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+  }
+  
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+  }
+  
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+  
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+  }
+  
+  .el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+  }
 </style>
