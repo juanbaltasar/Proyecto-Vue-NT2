@@ -3,17 +3,20 @@
       <main id="app" class="container-fluid mt-3">
         <Header />
         <router-view />
+        <CarritoCompras/>
       </main>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
+import CarritoCompras from './components/carrito-compras'
 
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
+    CarritoCompras
   }
 }
 </script>

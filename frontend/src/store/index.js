@@ -1,14 +1,13 @@
-import Vuex from 'vuex'
-import Vue from 'vue'
+import { createStore } from 'vuex'
 import shop from '../api/shop'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
-  state: {
-    productos: [],
-    carrito: [],
-    statusCompra: null
+export default createStore({
+  state() {
+    return {
+      productos: [],
+      carrito: [],
+      statusCompra: null
+    }
   },
   getters: {
     productosDisponibles (state) {

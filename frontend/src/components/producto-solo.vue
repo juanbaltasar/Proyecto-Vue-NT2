@@ -16,6 +16,11 @@
         
         <div class="content is-clearfix">
           <p id="descripcionProd">{{descripcion}}</p>
+          <div id="boton">
+            <button @click="anadirAlCarrito(id)">
+              <img src="../assets/shopping-cart-icon.png" width="20px" class="icon">
+            </button>
+          </div>
           <p class="is-pulled-right" id="precioProd">
             <span class="title is-6"><strong>${{precio}}</strong></span>
           </p>
@@ -56,8 +61,8 @@ export default {
     }
   },
   methods: {
-    verDetalle(id){
-      return id
+    anadirAlCarrito (id) {
+      this.$store.dispatch('anadirAlCarrito', id)
     }
   }
 }
