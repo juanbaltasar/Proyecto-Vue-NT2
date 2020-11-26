@@ -1,8 +1,11 @@
 <template>
-    <div id="contenedorLista">
+    <div class="columns is-centered is-multiline">
       <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif">
-      <div id="contenedorProd" v-for="pr in productos" :key="pr.id">
+      <div class="card column is-one-quarter" v-for="pr in productos" :key="pr.id">
         <ProductoSolo v-bind="pr"/>
+      </div>
+      <div class="section" v-if="productos.length === 0">
+        <p>{{ noProductLabel }}</p>
       </div>
     </div>
 </template>
@@ -17,7 +20,8 @@ export default {
   },
   data () {
     return {
-      loading: false
+      loading: false,
+      noProductLabel: "No hay productos para mostrar"
     }
   },
   computed: {
@@ -34,17 +38,7 @@ export default {
 </script>
 
 <style>
-    #contenedorProd{
-        display: inline-block;
-        padding: 10px;
-        width: 20%;
-        height: 100%;
-        vertical-align:top;
-    }
-    #contenedorProd :hover{
-        background: rgb(210, 210, 210);
-    }
-    #contenedorLista{
-        display: inline;
-    }
+  .card {
+    margin: 10px;
+  }
 </style>
