@@ -63,7 +63,7 @@ export default createStore({
     isLoginModalOpen: state => {
       return state.systemInfo.openLoginModal;
     },
-    isSignupModalOpen: state => {
+    isSignUpModalOpen: state => {
       return state.systemInfo.openSignupModal;
     },
     isCheckoutModalOpen: state => {

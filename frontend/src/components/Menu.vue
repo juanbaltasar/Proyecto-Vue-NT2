@@ -74,7 +74,8 @@ export default {
 			// this.$store.commit('showLoginModal', true);
 		},
 		showSignupModal () {
-			// this.$store.commit('showSignupModal', true);
+			this.$store.commit('showSignupModal', true);
+			console.log("Metodo del menu");
 		}
 	}
 }

@@ -4,6 +4,7 @@
         <Header />
         <router-view />
         <CarritoCompras/>
+        <FormularioCrearUser/>
       </main>
   </div>
 </template>
@@ -11,12 +12,14 @@
 <script>
 import Header from '@/components/Header'
 import CarritoCompras from './components/carrito-compras'
+import FormularioCrearUser from './components/FormularioCrearUser'
 
 export default {
   name: 'App',
   components: {
     Header,
-    CarritoCompras
+    CarritoCompras,
+    FormularioCrearUser
   }
 }
 </script>
