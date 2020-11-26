@@ -40,15 +40,14 @@ export default {
   },
   data() {
       return {
-        producto: {
-            id: '1',
-            nombre: 'Prueba',
-            imagen: 'https://media.staticontent.com/media/pictures/9845587c-21d7-4822-be21-bc30fcc47836',
-            descripcion:'Prueba de descripcion',
-            precio: '200000'
-        }
-        // producto: this.$store.getters.product(this.$route.params.id)
-
+        // producto: {
+        //     id: '1',
+        //     nombre: 'Prueba',
+        //     imagen: 'https://media.staticontent.com/media/pictures/9845587c-21d7-4822-be21-bc30fcc47836',
+        //     descripcion:'Prueba de descripcion',
+        //     precio: '200000'
+        // }
+         producto: this.$store.getters.getProductById(this.$route.params.id)
     } 
   },
   methods: {
