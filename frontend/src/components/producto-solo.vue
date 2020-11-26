@@ -22,7 +22,7 @@
             </button>
           </div>
           <p class="is-pulled-right" id="precioProd">
-            <span class="title is-6"><strong>${{precio}}</strong></span>
+            <span class="title is-6"><strong>${{precioConFormato}}</strong></span>
           </p>
         </div>
       </div>
@@ -58,6 +58,15 @@ export default {
     precio: {
         type: Number,
         default: 0
+    }
+  },
+  computed: {
+    precioConFormato () {
+      var prec = this.precio.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      })
+      return prec
     }
   },
   methods: {
