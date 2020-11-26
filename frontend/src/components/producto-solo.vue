@@ -1,39 +1,44 @@
 <template>
-  <router-link :to="{ name: 'DetalleProducto', params: { id: id}}">
-    <div>
+  <div>
+    <router-link :to="{ name: 'DetalleProducto', params: { id: id}}">
       <div class="card-image">
         <figure class="image is-4by3">
           <img :src="imagen" alt="Placeholder image">
         </figure>
       </div>
+    </router-link>
 
-      <div class="card-content">
-        <div class="media">
-          <div class="media-content">
-            <p class="title is-5" id="nombreProd">{{nombre}}</p>
-          </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          <p class="title is-5" id="nombreProd">{{nombre}}</p>
         </div>
+      </div>
         
-        <div class="content is-clearfix">
-          <p id="descripcionProd">{{descripcion}}</p>
-          <div id="boton">
-            <button @click="anadirAlCarrito(id)">
-              <img src="../assets/shopping-cart-icon.png" width="20px" class="icon">
-            </button>
+      <div class="content is-clearfix">
+        <p id="descripcionProd">{{descripcion}}</p>
+          <span class="title is-6"><strong>{{precioConFormato}}</strong></span>
+        <p class="is-pulled-right" id="precioProd"></p>
+      </div>
+      <div class="card-footer center btn-actions">
+        <div class="card-footer-item field is-grouped">
+          <div class="buttons" id="boton">
+              <button class="button is-primary" @click="anadirAlCarrito(id)">{{ addToCartLabel }}</button>
           </div>
-          <p class="is-pulled-right" id="precioProd">
-            <span class="title is-6"><strong>${{precioConFormato}}</strong></span>
-          </p>
         </div>
       </div>
     </div>
-  </router-link>
-
+  </div>
 </template>
 
 <script>
 export default {
   name: 'ProductoSolo',
+  data () {
+    return {
+      addToCartLabel: 'Agregar al carrito'
+    }
+  },
   props: {
     id: {
         type: Number,

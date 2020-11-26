@@ -6,7 +6,19 @@ export default createStore({
     return {
       productos: [],
       carrito: [],
-      statusCompra: null
+      statusCompra: null,
+      userInfo: {
+        isLoggedIn: false,
+        isSignedUp: false,
+        hasSearched: false,
+        name: '',
+        productTitleSearched: ''
+      },
+      systemInfo: {
+        openLoginModal: false,
+        openSignupModal: false,
+        openCheckoutModal: false
+      }
     }
   },
   getters: {
@@ -17,6 +29,7 @@ export default createStore({
       return state.carrito.map(cartItem => {
         const producto = state.productos.find(producto => producto.id === cartItem.id)
         return {
+          id: producto.id,
           nombre: producto.nombre,
           precio: producto.precio,
           cantidad: cartItem.cantidad
@@ -29,11 +42,40 @@ export default createStore({
         total += producto.precio * producto.cantidad
       })
       return total
+    },
+    productsAdded: state => {
+      return state.productos.filter(el => {
+        return el.isAddedToCart;
+      });
+    },
+    getProductById: state => id => {
+      return state.productos.find(product => product.id == id);
+    },
+    isUserLoggedIn: state => {
+      return state.userInfo.isLoggedIn;
+    },
+    isUserSignedUp: state => {
+      return state.userInfo.isSignedUp;
+    },
+    getUserName: state => {
+      return state.userInfo.name;
+    },
+    isLoginModalOpen: state => {
+      return state.systemInfo.openLoginModal;
+    },
+    isSignupModalOpen: state => {
+      return state.systemInfo.openSignupModal;
+    },
+    isCheckoutModalOpen: state => {
+      return state.systemInfo.openCheckoutModal;
+    },
+    quantity: state => {
+      return state.productos.cantidad;
     }
   },
   actions: {
     traerProductos ({commit}) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         shop.getProducts(productos => {
           commit('setProductos', productos)
           resolve()
@@ -86,6 +128,40 @@ export default createStore({
     },
     vaciarCarrito (state) {
       state.carrito = []
+    },
+    isUserLoggedIn: (state, isUserLoggedIn) => {
+      state.userInfo.isLoggedIn = isUserLoggedIn;
+    },
+    isUserSignedUp: (state, isSignedUp) => {
+      state.userInfo.isSignedUp = isSignedUp;
+    },
+    setHasUserSearched: (state, hasSearched) => {
+      state.userInfo.hasSearched = hasSearched;
+    },
+    setUserName: (state, name) => {
+      state.userInfo.name = name;
+    },
+    setProductTitleSearched: (state, titleSearched) => {
+      state.userInfo.productTitleSearched = titleSearched;
+    },
+    showLoginModal: (state, show) => {
+      state.systemInfo.openLoginModal = show;
+    },
+    showSignupModal: (state, show) => {
+      state.systemInfo.openSignupModal = show;
+    },
+    showCheckoutModal: (state, show) => {
+      state.systemInfo.openCheckoutModal = show;
+    },
+    quantity: (state, data) => {
+      state.productos.forEach(el => {
+        if (data.id === el.id) {
+          el.quantity = data.quantity;
+        }
+      });
+    },
+    SET_USER(state, authUser) {
+      state.authUser = authUser
     }
   }
 })

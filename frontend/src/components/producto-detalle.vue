@@ -34,7 +34,7 @@ export default {
   name: 'DetalleProducto',
   props: {
     id: {
-        type: Number,
+        type: String,
         required: true
     }
   },

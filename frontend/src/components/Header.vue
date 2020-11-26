@@ -21,6 +21,11 @@
         </div> -->
         
         <div class="navbar-end">
+          <div class="nav-item">
+            <router-link to="/carrito" @click="showCheckoutModal">
+              <a class="nav-link" href="#"><img src="../assets/shopping-cart-icon.png" width="20px" class="icon"></a>
+            </router-link>
+          </div>
           <!-- <div class="navbar-item shopping-cart" @click="showCheckoutModal">
             <span class="icon">
               <i class="fa fa-shopping-cart"></i>
@@ -67,9 +72,9 @@
     },
 
     methods: {
-      // showCheckoutModal () {
-      //   this.$store.commit('showCheckoutModal', true);
-      // }
+       showCheckoutModal () {
+         this.$store.commit('showCheckoutModal', true);
+       }
     }
   };
 </script>
