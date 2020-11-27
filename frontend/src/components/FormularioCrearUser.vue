@@ -199,6 +199,9 @@
   .src-components-formularioVue {
 
   }
+  * {
+    font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+  }
 
   .jumbotron {
     background-color: rgb(149, 223, 204);

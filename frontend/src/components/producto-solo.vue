@@ -11,7 +11,7 @@
         <div class="card-content__title">
             <h2 class="title is-4">{{ nombre }}</h2>
         </div>
-          
+        <br/>
         <div class="card-content__text">
           <p id="descripcionProd">{{descripcion}}</p>
         </div>
@@ -19,6 +19,7 @@
         <div class="card-content__text is-pulled-left has-text-centered">
             <span class="title is-5"><strong>{{precioConFormato}}</strong></span>
         </div>
+        <br/><br/>
         <div class="card-content__btn is-pulled-right">
             <button class="button is-primary" @click="anadirAlCarrito(id)">{{ addToCartLabel }}</button>
         </div>
@@ -88,8 +89,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
+* {
 
+    font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    text-align: left;
+    padding-left: 5px;
+  }
  .card-content {
     padding: 15px 10px 15px 0;
 
@@ -102,4 +108,10 @@ export default {
       margin-bottom: 10px;
     }
   }
+  figure img {
+      height: 100px;
+      width: 200px;
+
+  }
+
 </style>

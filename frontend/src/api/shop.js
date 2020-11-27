@@ -1,10 +1,10 @@
 const _products = [
   {
     'id': 1,
-    'nombre': 'Playstation',
+    'nombre': 'Sony Playstation 5 Digital Edition',
     'imagen': 'https://cl.buscafs.com/www.levelup.com/public/uploads/images/650503_446x230.jpg',
     'precio': 100000,
-    'descripcion': 'Playstation 5, con 2 controles',
+    'descripcion': 'Playstation 5, con 2 controles. Requiere conexión a Internet.',
     'stock': 4
   },
   {
@@ -17,15 +17,13 @@ const _products = [
   },
   {
     'id': 3,
-    'nombre': 'Campera Peter Quill',
-    'imagen': 'https://images-na.ssl-images-amazon.com/images/I/91ARuci152L._AC_UL1500_.jpg',
+    'nombre': 'Campera Peter Quill - Marvel Inc',
+    'imagen': 'https://celebsclothes.com/wp-content/uploads/2019/07/star-lord-new-style-jacket.jpg',
     'precio': 15000,
     'descripcion': 'Campera de Star Lord, Guardianes de la Galaxia',
     'stock': 2
   }
 ]
-
-
 
 export default {
   getProducts (cb) {

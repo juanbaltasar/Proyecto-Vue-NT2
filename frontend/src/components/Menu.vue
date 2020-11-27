@@ -3,7 +3,7 @@
 		<div class="navbar-item">
 			<div class="field is-grouped">
 				<p class="control">
-					<a v-if="!isUserLoggedIn" class="navbar-button" @click="showSignupModal">
+					<a v-if="!isUserLoggedIn" class="button is-info is-rounded" @click="showSignupModal">
 						<span class="icon">
 							<i class="fa fa-user-plus"></i>
 						</span>
@@ -11,7 +11,7 @@
 					</a>
 				</p>
 				<p class="control">
-					<a v-if="!isUserLoggedIn" class="navbar-button" @click="showLoginModal">
+					<a v-if="!isUserLoggedIn" class="button is-success is-rounded" @click="showLoginModal">
 						<span class="icon">
 							<i class="fa fa-user"></i>
 						</span>
@@ -81,3 +81,10 @@ export default {
 }
 </script>
 
+<style lang="css" scoped>
+  * {
+
+    font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+  }
+
+</style>

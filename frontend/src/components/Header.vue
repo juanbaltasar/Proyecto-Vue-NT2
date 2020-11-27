@@ -3,7 +3,8 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div>
         <router-link to="/">
-          <a class="navbar-brand title" href="#">Ecommerce</a>
+          <!--<a class="navbar-brand title" href="#">Ecommerce</a>-->
+          <img src="../assets/logo_bar.png" alt="Ecommerce" width="200" height="100">
         </router-link> 
 
         <a role="button" class="navbar-burger burger" @click="isMenuOpen = !isMenuOpen" aria-label="menu" aria-expanded="false">
@@ -79,7 +80,11 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
+  * {
+
+    font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+  }
   .title {
     color: black;
     font-size: 28px;

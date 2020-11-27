@@ -38,7 +38,13 @@ export default {
 </script>
 
 <style>
+* {
+
+    font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+  }
   .card {
     margin: 10px;
   }
+  
+
 </style>

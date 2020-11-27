@@ -5,6 +5,7 @@
         <router-view />
         <CarritoCompras/>
         <FormularioCrearUser/>
+        <Footer/>
       </main>
   </div>
 </template>
@@ -13,13 +14,15 @@
 import Header from '@/components/Header'
 import CarritoCompras from './components/carrito-compras'
 import FormularioCrearUser from './components/FormularioCrearUser'
+import Footer from './components/Footer'
 
 export default {
   name: 'App',
   components: {
     Header,
     CarritoCompras,
-    FormularioCrearUser
+    FormularioCrearUser,
+    Footer
   }
 }
 </script>
