@@ -25,8 +25,12 @@
                                 <span class="title"><strong>$ {{ producto.precio }}</strong></span>
                             </div>
                             <div class="card-content__btn is-pulled-right">
-                            <button class="button is-primary" @click="anadirAlCarrito(id)">{{ addToCartLabel }}</button>
+                                <button class="button is-primary" @click="anadirAlCarrito(producto.id)">{{ addToCartLabel }}</button>
                             </div>
+                            <div v-if="modalConfirmar" class="notification is-info">
+                                <button class="delete" @click="modalConfirmar = !modalConfirmar"></button>
+                                     {{confirmAddLabel}}
+                                </div>
                             <br/> 
                             <br/>
                             <img src="../assets/electro.jpg" alt="Electro" width="1000" height="1000">
@@ -35,10 +39,6 @@
                 </div>
             <!--</div>-->
         </div>
-        <div v-if="modalConfirmar" class="notification is-info">
-      <button class="delete" @click="modalConfirmar = !modalConfirmar"></button>
-      {{confirmAddLabel}}
-    </div>
     </div>
 
 </template>
@@ -48,13 +48,6 @@ export default {
   name: 'DetalleProducto',
   data() {
       return {
-        // producto: {
-        //     id: '1',
-        //     nombre: 'Prueba',
-        //     imagen: 'https://media.staticontent.com/media/pictures/9845587c-21d7-4822-be21-bc30fcc47836',
-        //     descripcion:'Prueba de descripcion',
-        //     precio: '200000'
-        // }
         producto: this.$store.getters.getProductById(this.$route.params.id),
         addToCartLabel: 'Agregar al carrito',
         confirmAddLabel: 'Producto agregado exitosamente!',
@@ -63,28 +56,8 @@ export default {
   },
    props: {
     id: {
-        type: Number,
+        type: String,
         required: true
-    },
-
-    nombre: {
-        type: String,
-        default: 'Nombre del producto'
-    },
-
-    imagen: {
-        type: String,
-        default: '#'
-    },
-
-    descripcion: {
-        type: String,
-        default: 'un Producto'
-    },
-
-    precio: {
-        type: Number,
-        default: 0
     }
   },
   methods: {
@@ -105,7 +78,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 * {
 
     font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
@@ -126,9 +99,6 @@ export default {
     margin-top: -230px;
     margin-left: -200px;
 
-    &__title {
-      
-    }
     &__text {
       margin: 16px 0;
     }

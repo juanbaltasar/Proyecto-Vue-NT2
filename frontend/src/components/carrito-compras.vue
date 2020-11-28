@@ -23,7 +23,7 @@
 			</section>
 			<footer class="modal-card-foot">
 				<button v-show="products.length > 0 && !isCheckoutSection" class="button is-success" @click="onNextBtn">{{ buyLabel }}</button>
-				<button v-if="isCheckoutSection" class="button is-success" @click="closeModal(true)">{{ closeLabel }}</button>
+				<button v-if="isCheckoutSection" class="button is-success" @click="closeModal(false)">{{ closeLabel }}</button>
 			</footer>
 		</div>
 	</div>
