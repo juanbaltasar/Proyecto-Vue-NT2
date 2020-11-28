@@ -47,8 +47,7 @@ export default {
 
 	computed: {
 		isUserLoggedIn () {
-			return false
-			// return this.$store.getters.isUserLoggedIn;
+			return this.$store.getters.isUserLoggedIn;
 		},
 		getUserName () {
 			let name = this.$store.getters.getUserName;
@@ -63,15 +62,14 @@ export default {
 
 	methods: {
 		logout () {
-			// this.$store.commit('isUserLoggedIn', false);
-			// this.$store.commit('isUserSignedUp', false);
-			// this.$store.commit('removeProductsFromFavourite');
+			this.$store.commit('isUserLoggedIn', false);
+			this.$store.commit('isUserSignedUp', false);
+			this.$store.commit('removeProductsFromFavourite');
 
-			// // redirect to homepage
-			// this.$router.push({ name: 'index' });
+			this.$router.push({ name: 'index' });
 		},
 		showLoginModal () {
-			// this.$store.commit('showLoginModal', true);
+			this.$store.commit('showLoginModal', true);
 		},
 		showSignupModal () {
 			this.$store.commit('showSignupModal', true);

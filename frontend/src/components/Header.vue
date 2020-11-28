@@ -3,7 +3,6 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div>
         <router-link to="/">
-          <!--<a class="navbar-brand title" href="#">Ecommerce</a>-->
           <img src="../assets/logo_bar.png" alt="Ecommerce" width="200" height="100">
         </router-link> 
 
@@ -14,24 +13,18 @@
         </a>
       </div>
 
-      <div class="navbar-menu is-active">
-        <!-- <div class="navbar-start">
-          <div class="navbar-item field">
-            <VmSearch></VmSearch>
-          </div>
-        </div> -->
-        
+      <div class="navbar-menu is-active">      
         <div class="navbar-end">
           <div class="nav-item">
             <router-link to="/carrito" @click="showCheckoutModal">
               <a class="nav-link" href="#"><img src="../assets/shopping-cart-icon.png" width="20px" class="icon"></a>
+              <span :class="[numProductsAdded > 0 ? 'tag is-info' : '']">{{ numProductsAdded }}</span>
             </router-link>
           </div>
           <!-- <div class="navbar-item shopping-cart" @click="showCheckoutModal">
             <span class="icon">
               <i class="fa fa-shopping-cart"></i>
             </span>
-            <span :class="[numProductsAdded > 0 ? 'tag is-info' : '']">{{ numProductsAdded }}</span>
           </div> -->
         </div>
       </div>
@@ -45,31 +38,25 @@
 
 <script>
   import Menu from './Menu';
-  // import VmSearch from '../search/Search';
 
   export default {
     name: 'Header',
 
     data () {
       return {
-        // linkedinTooltip: 'Follow us on Linkedin',
-        // facebookTooltip: 'Follow us on Facebook',
-        // twitterTooltip: 'Follow us on Twitter',
-        // instagramTooltip: 'Follow us on Instagram',
         isCheckoutActive: false,
         isMenuOpen: false
       }
     },
 
     components: {
-      // VmSearch,
       Menu
     },
 
     computed: {
-      // numProductsAdded () {
-      //   return this.$store.getters.productsAdded.length;
-      // }
+       numProductsAdded () {
+         return this.$store.getters.getCarritoLength
+       }
     },
 
     methods: {

@@ -5,17 +5,17 @@ import { VuelidatePlugin } from '@vuelidate/core'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-//import currency from './currency'
+import store from './store/store'
 
-import store from './store/index'
-
-import './bootstrap'
+import './plugins/bootstrap'
 import 'bulma/css/bulma.css'
+
+import { FontAwesomeIcon } from "@/plugins/font-awesome";
 
 createApp(App)
 .use(router)
 .use(VuelidatePlugin)
 .use(VueAxios,axios)
 .use(store)
-//.use(currency)
+.component('fa', FontAwesomeIcon)
 .mount('#app')

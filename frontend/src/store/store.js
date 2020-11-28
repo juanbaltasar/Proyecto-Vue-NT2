@@ -48,6 +48,9 @@ export default createStore({
         return el.isAddedToCart;
       });
     },
+    getCarritoLength: state => {
+      return state.carrito.length;
+    },
     getProductById: state => id => {
       return state.productos.find(product => product.id == id);
     },
