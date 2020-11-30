@@ -2,12 +2,6 @@ import { createStore } from 'vuex'
 import shop from '../api/shop'
 import axios from 'axios'
 
-const axiosInstance = axios.create({
-  headers: {
-    "Access-Control-Allow-Origin": "*"
-  }
-});
-
 const url = "https://lit-depths-95105.herokuapp.com/"
 
 export default createStore({
@@ -88,7 +82,7 @@ export default createStore({
   actions: {
     async productosAxios({commit}) {
       try {
-          let res = await axiosInstance(url + "productos")
+          let res = await axios(url + "productos")
           console.log(res.data)
           commit('setProductos', res.data)
       }
