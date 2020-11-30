@@ -25,7 +25,7 @@
                                 <span class="title"><strong>$ {{ producto.precio }}</strong></span>
                             </div>
                             <div class="card-content__btn is-pulled-right">
-                                <button class="button is-primary" @click="anadirAlCarrito(producto.id)">{{ addToCartLabel }}</button>
+                                <button class="button is-primary" @click="anadirAlCarrito(producto._id)">{{ addToCartLabel }}</button>
                             </div>
                             <div v-if="modalConfirmar" class="notification is-info">
                                 <button class="delete" @click="modalConfirmar = !modalConfirmar"></button>
@@ -61,8 +61,8 @@ export default {
     }
   },
   methods: {
-    anadirAlCarrito (id) {
-        this.$store.dispatch('anadirAlCarrito', id)
+    anadirAlCarrito (_id) {
+        this.$store.dispatch('anadirAlCarrito', _id)
         this.modalConfirmar = true
     }
   },

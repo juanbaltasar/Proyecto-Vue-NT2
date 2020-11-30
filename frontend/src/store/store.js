@@ -1,5 +1,14 @@
 import { createStore } from 'vuex'
 import shop from '../api/shop'
+import axios from 'axios'
+
+const axiosInstance = axios.create({
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  }
+});
+
+const url = "https://lit-depths-95105.herokuapp.com/"
 
 export default createStore({
   state() {
@@ -27,9 +36,9 @@ export default createStore({
     },
     getCarritoProductos (state) {
       return state.carrito.map(cartItem => {
-        const producto = state.productos.find(producto => producto.id === cartItem.id)
+        const producto = state.productos.find(producto => producto._id === cartItem._id)
         return {
-          id: producto.id,
+          _id: producto._id,
           nombre: producto.nombre,
           precio: producto.precio,
           cantidad: cartItem.cantidad
@@ -52,7 +61,7 @@ export default createStore({
       return state.carrito.length;
     },
     getProductById: state => id => {
-      return state.productos.find(product => product.id == id);
+      return state.productos.find(product => product._id == id);
     },
     isUserLoggedIn: state => {
       return state.userInfo.isLoggedIn;
@@ -77,20 +86,22 @@ export default createStore({
     }
   },
   actions: {
-    traerProductos ({commit}) {
-      return new Promise((resolve) => {
-        shop.getProducts(productos => {
-          commit('setProductos', productos)
-          resolve()
-        })
-      })
+    async productosAxios({commit}) {
+      try {
+          let res = await axiosInstance(url + "productos")
+          console.log(res.data)
+          commit('setProductos', res.data)
+      }
+      catch(error) {
+          console.log('HTTP GET ERROR', error)
+      }
     },
     anadirAlCarrito (context, productoId) {
-      var producto = context.state.productos.find(item => item.id === productoId)
+      var producto = context.state.productos.find(item => item._id === productoId)
       if (producto.stock > 0) {
-        const itemDelCarrito = context.state.carrito.find(item => item.id === producto.id)
+        const itemDelCarrito = context.state.carrito.find(item => item._id === producto._id)
         if (!itemDelCarrito) {
-          context.commit('pushearAlCarrito', producto.id)
+          context.commit('pushearAlCarrito', producto._id)
         } else {
           context.commit('incrementarCantidadDeItem', itemDelCarrito)
         }
@@ -116,7 +127,7 @@ export default createStore({
     },
     pushearAlCarrito (state, productoID) {
       state.carrito.push({
-        id: productoID,
+        _id: productoID,
         cantidad: 1
       })
     },
@@ -158,7 +169,7 @@ export default createStore({
     },
     quantity: (state, data) => {
       state.productos.forEach(el => {
-        if (data.id === el.id) {
+        if (data._id === el._id) {
           el.quantity = data.quantity;
         }
       });

@@ -2,7 +2,7 @@
   <div class="section">
     <div class="card is-clearfix columns">
       <figure class="card-image is-480x480 column">
-        <router-link :to="{ name: 'DetalleProducto', params: { id: id}}">
+        <router-link :to="{ name: 'DetalleProducto', params: { id: _id}}">
           <img :src="imagen" alt="Placeholder image">
         </router-link>
       </figure>
@@ -19,7 +19,7 @@
             <span class="title is-5"><strong>{{precioConFormato}}</strong></span>
         </div>
         <div class="card-content__btn is-pulled-right">
-            <button class="button is-primary" @click="anadirAlCarrito(id)">{{ addToCartLabel }}</button>
+            <button class="button is-primary" @click="anadirAlCarrito(_id)">{{ addToCartLabel }}</button>
         </div>
         </div>
       </div>
@@ -44,8 +44,8 @@ export default {
     }
   },
   props: {
-    id: {
-        type: Number,
+    _id: {
+        type: String,
         required: true
     },
 

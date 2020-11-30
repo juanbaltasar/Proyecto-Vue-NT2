@@ -7,7 +7,8 @@ import Carrito from '../components/carrito-compras.vue'
 const routes = [
     { path: '/', name: 'Productos', component: Inicio },
     { path: '/detalleProducto/:id', name: 'DetalleProducto', component: DetalleProducto, props:true },
-    { path: '/carrito', name: 'Carrito', component: Carrito}
+    { path: '/carrito', name: 'Carrito', component: Carrito },
+    { path: '/:catchAll(.*)', name: 'Nofound', component: Inicio }
 ]
 
 const router = createRouter({

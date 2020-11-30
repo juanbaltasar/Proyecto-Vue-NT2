@@ -1,7 +1,7 @@
 <template>
     <div class="columns is-centered is-multiline">
       <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif">
-      <div class="card column is-one-third" v-for="pr in productos" :key="pr.id">
+      <div class="card column is-one-third" v-for="pr in productos" :key="pr._id">
         <ProductoSolo v-bind="pr"/>
       </div>
       <div class="section" v-if="productos.length === 0">
@@ -31,7 +31,7 @@ export default {
   },
   created () {
     this.loading = true
-    this.$store.dispatch('traerProductos')
+    this.$store.dispatch('productosAxios')
       .then(() => { this.loading = false })
   }
 }
