@@ -16,7 +16,7 @@
         </div>
         <div class="column">
         <div class="card-content__text is-pulled-left has-text-centered">
-            <span class="title is-5"><strong>{{precioConFormato}}</strong></span>
+            <span class="title is-5"><strong>{{getCurrency(precio)}}</strong></span>
         </div>
         <div class="card-content__btn is-pulled-right">
             <button class="button is-primary" @click="anadirAlCarrito(_id)">{{ addToCartLabel }}</button>
@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import {currency} from '../currency'
+
 export default {
   name: 'ProductoSolo',
   data () {
@@ -69,21 +71,13 @@ export default {
         default: 0
     }
   },
-  computed: {
-    precioConFormato () {
-      var prec = this.precio.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD'
-      })
-      return prec
-    }
-  },
   methods: {
     anadirAlCarrito (id) {
       this.$store.dispatch('anadirAlCarrito', id)
       this.modalConfirmar = true
     }
-  }
+  },
+  mixins: [currency]
 }
 </script>
 

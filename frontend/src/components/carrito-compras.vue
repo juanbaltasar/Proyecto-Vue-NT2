@@ -11,7 +11,7 @@
 					<div class="box" v-for="product in products" :key="product.id">
 						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product.id)">{{ removeLabel }}</button>
 						<p>{{ product.nombre }}  {{ product.cantidad > 0 ?  ` - Cantidad: ${product.cantidad}` : ''}}</p>
-						<p>${{ product.precio }} </p>
+						<p>{{ getCurrency(product.precio) }} </p>
 					</div>
 					<div v-if="products.length === 0">
 						<p>{{ cartEmptyLabel }}</p>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import {currency} from '../currency'
 export default {
 
   data () {
@@ -110,7 +111,8 @@ export default {
 		onPrevBtn () {
 			this.isCheckoutSection = false;
 		}
-  }
+  },
+  mixins: [currency]
 }
 </script>
 
