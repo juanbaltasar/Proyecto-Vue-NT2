@@ -118,7 +118,11 @@ export default createStore({
               resolve("OK")
             })
             .catch(error => { 
-              reject(error.response.data.errors)
+              if(!error.response.data.success)
+                if(error.response.data.message == "Duplicated id!")
+                  reject("El usuario ya se encuentra registrado! Ingrese un email distinto o logueese en la aplicación")
+              
+              reject("Ocurrió un error al procesar su solicitud. Intente nuevamente en unos minutos")
             })
         })
     },

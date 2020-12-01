@@ -1,19 +1,24 @@
 <template>
   <div :class="[ openModal ? 'is-active' : '', 'modal' ]">
-
-    <div :class="[getSpinnerClass()]">
-      <div class="loader is-loading"></div>
-    </div>
-
     <div class="modal-background"></div>
       <div class="modal-card">
         <div class="jumbotron">
-         <h2 v-if="!isUserSignedUp">Registro de usuario</h2>
-         <h2 v-if="isUserSignedUp">Exito</h2>
-         <hr />                
-      <form novalidate autocomplete="off" @submit.prevent="enviar()">
-        <div v-if="!isUserSignedUp">
-          <div class="form-group">
+          <h2 v-if="!isUserSignedUp">Registro de usuario</h2>
+          <h2 v-if="isUserSignedUp">Exito</h2>
+          <hr />                
+          <form novalidate autocomplete="off" @submit.prevent="enviar()">
+            <div v-if="!isUserSignedUp">
+
+              <div v-if="mostrarError" class="notification is-danger">
+                  <button class="delete" @click="mostrarError = !mostrarError"></button>
+                  {{mensajeError}}
+              </div>
+
+              <div class="form-group">
+                <div :class="[getSpinnerClass()]">
+                    <div class="loader is-loading"></div>
+                </div>
+
                 <label for="email">Email</label>
                 <input 
                     type="email"
@@ -26,78 +31,78 @@
                     <div v-if="v.formUser.email.required.$invalid">Este campo es requerido</div>
                     <div v-if="v.formUser.email.$invalid">Debe proveer un email válido</div>
                 </div>
-          </div>
+              </div>
 
-          <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input 
-                    type="text"
-                    id="nombre"
-                    class="form-control"
-                    v-model.number="v.formUser.nombre.$model"
-                >
+              <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input 
+                        type="text"
+                        id="nombre"
+                        class="form-control"
+                        v-model.number="v.formUser.nombre.$model"
+                    >
 
-                <div v-if="v.formUser.nombre.$error && v.formUser.nombre.$dirty" class="alert alert-danger mt-1">
-                    <div v-if="v.formUser.nombre.required.$invalid">Este campo es requerido</div>
-                    <div v-if="v.formUser.nombre.alpha.$invalid">Este campo solo admite letras</div>
-                </div>
-          </div>
+                    <div v-if="v.formUser.nombre.$error && v.formUser.nombre.$dirty" class="alert alert-danger mt-1">
+                        <div v-if="v.formUser.nombre.required.$invalid">Este campo es requerido</div>
+                        <div v-if="v.formUser.nombre.alpha.$invalid">Este campo solo admite letras</div>
+                    </div>
+              </div>
 
-          <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input 
-                    type="text"
-                    id="apellido"
-                    class="form-control"
-                    v-model.number="v.formUser.apellido.$model"
-                >
+              <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input 
+                        type="text"
+                        id="apellido"
+                        class="form-control"
+                        v-model.number="v.formUser.apellido.$model"
+                    >
 
-                <div v-if="v.formUser.apellido.$error && v.formUser.apellido.$dirty" class="alert alert-danger mt-1">
-                    <div v-if="v.formUser.apellido.required.$invalid">Este campo es requerido</div>
-                    <div v-if="v.formUser.apellido.alpha.$invalid">Este campo solo admite letras</div>
-                </div>
-          </div>
+                    <div v-if="v.formUser.apellido.$error && v.formUser.apellido.$dirty" class="alert alert-danger mt-1">
+                        <div v-if="v.formUser.apellido.required.$invalid">Este campo es requerido</div>
+                        <div v-if="v.formUser.apellido.alpha.$invalid">Este campo solo admite letras</div>
+                    </div>
+              </div>
 
-          <div class="form-group">
-                <label for="password">Password</label>
-                <input 
-                    type="password"
-                    id="password"
-                    class="form-control"
-                    v-model="v.formUser.password.$model"
-                >
+              <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        v-model="v.formUser.password.$model"
+                    >
 
-                <div v-if="v.formUser.password.$error && v.formUser.password.$dirty" class="alert alert-danger mt-1">
-                    <div v-if="v.formUser.password.required.$invalid">Este campo es requerido</div>
-                    <div v-if="v.formUser.password.minLength.$invalid">Este campo debe tener al menos {{v.formUser.password.minLength.$params.min}} caracteres</div>
-                    <div v-if="v.formUser.password.maxLength.$invalid">Este campo debe tener máximo {{v.formUser.password.maxLength.$params.max}} caracteres</div>
-                    <div v-if="v.formUser.password.conEspacios.$invalid">No se permiten espacios en este campo</div>
-                </div>
-          </div>
-          <div class="form-group">
-                <input 
-                    type="submit"
-                    :disabled="v.$invalid"
-                    class="btn btn-success mt-4"
-                    value="Crear cuenta"
-                >
-          </div>
-        </div>
-          <div v-if="isUserSignedUp" class="level">
-            <div class="level-item has-text-centered">
-              <div>
-                <p class="heading">Cuenta creada correctamente</p>
+                    <div v-if="v.formUser.password.$error && v.formUser.password.$dirty" class="alert alert-danger mt-1">
+                        <div v-if="v.formUser.password.required.$invalid">Este campo es requerido</div>
+                        <div v-if="v.formUser.password.minLength.$invalid">Este campo debe tener al menos {{v.formUser.password.minLength.$params.min}} caracteres</div>
+                        <div v-if="v.formUser.password.maxLength.$invalid">Este campo debe tener máximo {{v.formUser.password.maxLength.$params.max}} caracteres</div>
+                        <div v-if="v.formUser.password.conEspacios.$invalid">No se permiten espacios en este campo</div>
+                    </div>
+              </div>
+              <div class="form-group">
+                    <input 
+                        type="submit"
+                        :disabled="v.$invalid"
+                        class="btn btn-success mt-4"
+                        value="Crear cuenta"
+                    >
               </div>
             </div>
-          </div>
-      </form>
-      
-      <button v-if="!isUserSignedUp" type="button" class="button is-info" @click="closeModal">Cancelar</button>
-      <button v-if="isUserSignedUp" type="button" class="button is-info" @click="closeModal">Aceptar</button>
+            <div v-if="isUserSignedUp" class="level">
+              <div class="level-item has-text-centered">
+                <div>
+                  <p class="heading">Cuenta creada correctamente</p>
+                </div>
+              </div>
+            </div>
+          </form>
+        
+          <button v-if="!isUserSignedUp" type="button" class="button is-info" @click="closeModal">Cancelar</button>
+          <button v-if="isUserSignedUp" type="button" class="button is-info" @click="closeModal">Aceptar</button>
 
-      <!-- <pre>{{v}}</pre> -->
+        <!-- <pre>{{v}}</pre> -->
 
-    </div>
+      </div>
     </div>
   </div>
 </template>
@@ -149,7 +154,9 @@
                password : ''
           },
           v: null,
-          loading: false         
+          loading: false,
+          mensajeError: '',
+          mostrarError: false,     
       }
     },
     methods: {
@@ -159,9 +166,17 @@
             if(!this.v.$invalid) {
               this.loading = true;
               let form = this.formUser
-              this.$store.dispatch('registrarUserAxios', form).then(() => {this.loading = false})
-              this.resetForm()
-              this.v.$reset()
+              this.$store.dispatch('registrarUserAxios', form)
+                .then(() => {
+                  this.loading = false
+                  this.resetForm()
+                  this.v.$reset()
+                })
+                .catch((e) => {
+                  this.mensajeError = e,
+                  this.mostrarError = true
+                  this.loading = false;
+                })
             }
         },
         
@@ -232,7 +247,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: #fff;
+    background: rgb(149, 223, 204);
     opacity: 0;
     z-index: -1;
     transition: opacity .3s;
