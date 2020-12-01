@@ -5,7 +5,7 @@ const _products = [
     'imagen': 'https://cl.buscafs.com/www.levelup.com/public/uploads/images/650503_446x230.jpg',
     'precio': 100000,
     'descripcion': 'Playstation 5, con 2 controles. Requiere conexión a Internet.',
-    'stock': 4
+    'cantidad': 4
   },
   {
     'id': 2,
@@ -13,7 +13,7 @@ const _products = [
     'imagen': 'https://www.tecnodigitalinsumos.com.ar/116-large_social/impresora-hp-laserjet-pro-m203dw-wifi.jpg',
     'precio': 25000,
     'descripcion': 'La mejor calidad de impresion con este producto',
-    'stock': 5
+    'cantidad': 5
   },
   {
     'id': 3,
@@ -21,7 +21,7 @@ const _products = [
     'imagen': 'https://celebsclothes.com/wp-content/uploads/2019/07/star-lord-new-style-jacket.jpg',
     'precio': 15000,
     'descripcion': 'Campera de Star Lord, Guardianes de la Galaxia',
-    'stock': 2
+    'cantidad': 2
   }
 ]
 

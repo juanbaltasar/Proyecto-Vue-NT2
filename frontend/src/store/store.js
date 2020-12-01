@@ -193,7 +193,6 @@ export default createStore({
     },
     isUserSignedUp: (state, isSignedUp) => {
       state.userInfo.isSignedUp = isSignedUp;
-      console.log('TEST: ', state.userInfo.isSignedUp)
     },
     setHasUserSearched: (state, hasSearched) => {
       state.userInfo.hasSearched = hasSearched;

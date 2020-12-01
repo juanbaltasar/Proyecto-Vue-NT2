@@ -8,6 +8,11 @@
 			</header>
 			<section class="modal-card-body">
 				<div v-if="!isCheckoutSection">
+
+					<div :class="[getSpinnerClass()]">
+						<div class="loader is-loading"></div>
+					</div>
+
 					<div class="box" v-for="product in products" :key="product._id">
 						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product._id)">{{ removeLabel }}</button>
 						<p>{{ product.nombre }}  {{ product.cantidad > 0 ?  ` - Cantidad: ${product.cantidad}` : ''}}</p>
@@ -39,7 +44,8 @@ export default {
 			removeLabel: 'Remover del carrito',
 			cartEmptyLabel: 'Tu carrito está vacío',
 			closeLabel: 'Cerrar',
-			isCheckoutSection: false
+			isCheckoutSection: false,
+			loading: false
 		}
   },
   computed: {
@@ -97,7 +103,13 @@ export default {
 		},
 		onNextBtn () {
 			if (this.isUserLoggedIn) {
+				this.loading = true;
 				this.isCheckoutSection = true;
+
+				this.$store.dispatch('comprarProductos');
+
+				this.loading = false;
+
 			} else {
 				this.$store.commit('showCheckoutModal', false);
 				this.$store.commit('showLoginModal', true);
@@ -105,13 +117,22 @@ export default {
 		},
 		onPrevBtn () {
 			this.isCheckoutSection = false;
-		}
+		},
+		getSpinnerClass(){
+          let baseClass = "loader-wrapper "
+
+          if(this.loading){
+            return baseClass.concat("is-active");
+          } else {
+            return baseClass;
+          }
+        }
   },
   mixins: [currency]
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 * {
 
     font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
@@ -121,6 +142,32 @@ export default {
   }
   ul{
     list-style: none
+  }
+
+  .loader-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgb(149, 223, 204);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+
+        .loader {
+            height: 80px;
+            width: 80px;
+        }
+
+    &.is-active {
+        opacity: 1;
+        z-index: 1;
+    }
   }
   
 </style>
