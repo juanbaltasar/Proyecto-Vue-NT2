@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div>
-        <router-link to="/">
+        <router-link :to="{ name: 'inicio' }">
           <img src="../assets/logo_bar.png" alt="Ecommerce" width="200" height="100">
         </router-link> 
 

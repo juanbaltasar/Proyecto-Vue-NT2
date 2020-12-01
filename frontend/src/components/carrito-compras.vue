@@ -77,7 +77,7 @@ export default {
 				} else {
 					productLabel = 'producto';
 				}
-				return `Comprar ${totalProducts} ${productLabel} a ${finalPrice}$`;
+				return `Comprar ${totalProducts} ${productLabel} a $${finalPrice}`;
 		},
 		isUserLoggedIn () {
 			return this.$store.getters.isUserLoggedIn;
