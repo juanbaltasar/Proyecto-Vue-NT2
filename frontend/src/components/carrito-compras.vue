@@ -8,8 +8,8 @@
 			</header>
 			<section class="modal-card-body">
 				<div v-if="!isCheckoutSection">
-					<div class="box" v-for="product in products" :key="product.id">
-						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product.id)">{{ removeLabel }}</button>
+					<div class="box" v-for="product in products" :key="product._id">
+						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product._id)">{{ removeLabel }}</button>
 						<p>{{ product.nombre }}  {{ product.cantidad > 0 ?  ` - Cantidad: ${product.cantidad}` : ''}}</p>
 						<p>{{ getCurrency(product.precio) }} </p>
 					</div>
@@ -93,12 +93,7 @@ export default {
 			}
 		},
 		removeFromCart (id) {
-			let data = {
-					id: id,
-					status: false
-			}
-			this.$store.commit('removeFromCart', id);
-			this.$store.commit('setAddedBtn', data);
+			this.$store.dispatch('quitarDelCarrito', id);
 		},
 		onNextBtn () {
 			if (this.isUserLoggedIn) {

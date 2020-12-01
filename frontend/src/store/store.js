@@ -102,6 +102,9 @@ export default createStore({
         context.commit('decrementarStock', producto)
       }
     },
+    quitarDelCarrito (context, productoId) {
+      context.commit('removerDelCarrito', productoId)
+    },
     comprarProductos (context) {
       shop.buyProducts(
         context.state.carrito,
@@ -124,6 +127,13 @@ export default createStore({
         _id: productoID,
         cantidad: 1
       })
+    },
+    removerDelCarrito (state, productoID) {
+      state.carrito.splice(
+        state.carrito.findIndex(function(i){ 
+          return i._id === productoID;
+        }),
+      1); 
     },
     incrementarCantidadDeItem (state, cartItem) {
       cartItem.cantidad++
