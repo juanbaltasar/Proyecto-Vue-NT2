@@ -13,7 +13,14 @@
         </a>
       </div>
 
-      <div class="navbar-menu is-active">      
+      <div class="navbar-menu is-active">
+        <div class="navbar-start">
+          <div class="navbar-item field">
+            <Buscar></Buscar>
+          </div>
+        </div>
+
+
         <div class="navbar-end">
           <div class="nav-item">
             <router-link to="/carrito" @click="showCheckoutModal">
@@ -38,6 +45,7 @@
 
 <script>
   import Menu from './Menu';
+  import Buscar from './buscar'
 
   export default {
     name: 'Header',
@@ -50,7 +58,8 @@
     },
 
     components: {
-      Menu
+      Menu,
+      Buscar
     },
 
     computed: {
@@ -71,6 +80,9 @@
   * {
 
     font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+  }
+  .navbar-start{
+    padding-left: 300px;
   }
   .title {
     color: black;

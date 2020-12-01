@@ -12,6 +12,7 @@
 
 <script>
 import ProductoSolo from '../components/producto-solo.vue'
+import { buscarPorTitulo } from '../filters';
 
 export default {
   name: 'ProductosLista',
@@ -21,18 +22,31 @@ export default {
   data () {
     return {
       loading: false,
-      noProductLabel: "No hay productos para mostrar"
+      noProductLabel: "No hay productos para mostrar",
+      productosFiltrados: []
     }
   },
   computed: {
     productos () {
-      return this.$store.state.productos
+       if (this.$store.state.userInfo.hasSearched) {
+        return this.getProductoPorTitulo();
+      } else {
+        return this.$store.state.productos;
+      }
     }
   },
   created () {
     this.loading = true
     this.$store.dispatch('productosAxios')
       .then(() => { this.loading = false })
+  },
+  methods: {
+    getProductoPorTitulo () {
+      let listOfProducts = this.$store.state.productos,
+          titleSearched = this.$store.state.userInfo.productTitleSearched;
+      
+      return this.productsFiltered = buscarPorTitulo(listOfProducts, titleSearched);
+    }
   }
 }
 </script>

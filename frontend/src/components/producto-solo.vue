@@ -15,12 +15,12 @@
           <p id="descripcionProd">{{descripcion}}</p>
         </div>
         <div class="column">
-        <div class="card-content__text is-pulled-left has-text-centered">
-            <span class="title is-5"><strong>{{getCurrency(precio)}}</strong></span>
-        </div>
-        <div class="card-content__btn is-pulled-right">
-            <button class="button is-primary" @click="anadirAlCarrito(_id)">{{ addToCartLabel }}</button>
-        </div>
+          <div class="card-content__text is-pulled-left has-text-centered">
+              <span class="title is-5"><strong>{{getCurrency(precio)}}</strong></span>
+          </div>
+          <div class="card-content__btn is-pulled-right">
+              <button class="button is-primary" @click="anadirAlCarrito(_id)">{{ addToCartLabel }}</button>
+          </div>
         </div>
       </div>
     </div>
