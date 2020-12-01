@@ -25,8 +25,8 @@
           <div class="nav-item">
             <router-link to="/carrito" @click="showCheckoutModal">
               <a class="nav-link" href="#"><img src="../assets/shopping-cart-icon.png" width="20px" class="icon"></a>
-              <span :class="[numProductsAdded > 0 ? 'tag is-info' : '']">{{ numProductsAdded }}</span>
             </router-link>
+              <span :class="[numProductsAdded > 0 ? 'tag is-info' : '']">{{ numProductsAdded }}</span>
           </div>
           <!-- <div class="navbar-item shopping-cart" @click="showCheckoutModal">
             <span class="icon">
