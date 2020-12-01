@@ -69,7 +69,6 @@ export default {
 		},
 		showSignupModal () {
 			this.$store.commit('showSignupModal', true);
-			console.log("Metodo del menu");
 		}
 	}
 }

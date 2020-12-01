@@ -3,11 +3,11 @@
     <div class="modal-background"></div>
       <div class="modal-card">
         <div class="jumbotron">
-         <h2>Registro de usuario</h2>
-         <hr />
-                   
-
+         <h2 v-if="!isUserSignedUp">Registro de usuario</h2>
+         <h2 v-if="isUserSignedUp">Exito</h2>
+         <hr />                
       <form novalidate autocomplete="off" @submit.prevent="enviar()">
+        <div v-if="!isUserSignedUp">
           <div class="form-group">
                 <label for="email">Email</label>
                 <input 
@@ -77,10 +77,18 @@
                     value="Crear cuenta"
                 >
           </div>
+        </div>
+          <div v-if="isUserSignedUp" class="level">
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Cuenta creada correctamente</p>
+              </div>
+            </div>
+          </div>
       </form>
       
-
-      <button type="button" class="button is-info" @click="closeModal">Cancelar</button>
+      <button v-if="!isUserSignedUp" type="button" class="button is-info" @click="closeModal">Cancelar</button>
+      <button v-if="isUserSignedUp" type="button" class="button is-info" @click="closeModal">Aceptar</button>
 
       <!-- <pre>{{v}}</pre> -->
 
@@ -135,34 +143,16 @@
                apellido: '',
                password : ''
           },
-          v: null,
-          url: ''
-          // TODO modificar url para el sendDatos
+          v: null         
       }
     },
     methods: {
 
-        delay : ms => new Promise(resolve => setTimeout(resolve, ms)),
-
-        /* Envio de datos del formularioVue al backend */
-        async sendDatosFormAxios(datos) {
-            try {
-              let res = await this.axios.post(this.url, datos, {'content-type': 'application/json'})
-              await this.delay(500)
-              console.log(res.data)
-            }
-            catch(error) {
-              console.log('HTTP POST ERROR', error)
-            }
-        },
-
-        /* Submit del form */
         async enviar() {
             this.v.$touch()
             if(!this.v.$invalid) {
               let form = this.formUser
-              console.log(form)
-              await this.sendDatosFormAxios(form)
+              this.$store.dispatch('registrarUserAxios', form)
               this.resetForm()
               this.v.$reset()
             }
@@ -178,17 +168,20 @@
 
         closeModal () {
           this.$store.commit('showSignupModal', false);
+          this.$store.commit('isUserSignedUp', false);
         },
     },
     computed: {
       openModal () {
-        console.log("Modal: ", this.$store.getters.isSignUpModalOpen);
         if (this.$store.getters.isSignUpModalOpen) {
           return true;
         } else {
           return false;
         }
-      }
+      },
+      isUserSignedUp () {
+        return this.$store.getters.isUserSignedUp;
+    },
     }
 }
 

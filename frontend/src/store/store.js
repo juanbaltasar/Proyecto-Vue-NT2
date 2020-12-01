@@ -84,7 +84,6 @@ export default createStore({
     async productosAxios({commit}) {
       try {
           let res = await axios(url + "productos")
-          console.log(res.data)
           commit('setProductos', res.data)
       }
       catch(error) {
@@ -98,6 +97,25 @@ export default createStore({
                 let usuario = res.data
                   commit('setTokenUsuario',usuario)
                   resolve("OK")
+            })
+            .catch(error => { 
+              reject(error.response.data.errors)
+            })
+        })
+    },
+    async registrarUserAxios({commit}, user) {
+      let datosUser = {
+        _id: user.email,
+        username: user.nombre + ' ' + user.apellido,
+        password : user.password,
+        esAdministrador: true
+      }
+
+      return new Promise((resolve, reject) => {
+        axios.put(url + "users/newUser", datosUser, {'content-type':'application/json'})
+            .then(() => {
+              commit('isUserSignedUp', true)
+              resolve("OK")
             })
             .catch(error => { 
               reject(error.response.data.errors)
@@ -171,6 +189,7 @@ export default createStore({
     },
     isUserSignedUp: (state, isSignedUp) => {
       state.userInfo.isSignedUp = isSignedUp;
+      console.log('TEST: ', state.userInfo.isSignedUp)
     },
     setHasUserSearched: (state, hasSearched) => {
       state.userInfo.hasSearched = hasSearched;
