@@ -6,7 +6,7 @@ class EnviadorDeMails{
         this.transporter = nodemailer.createTransport(configuracion);
     }
 
-    async MandarMail(A, Asunto = 'Sin Asunto', Texto = '', Html = '', adjuntos=[]) { //El nyc me marca que esta linea no es cubierta por los tests, supongo que por los parametros default
+    async MandarMail(A, Asunto = 'Sin Asunto', Texto = '', Html = '', adjuntos=[]) { 
         let OpcionesMail;
         if (Texto != '') {
             OpcionesMail = {
