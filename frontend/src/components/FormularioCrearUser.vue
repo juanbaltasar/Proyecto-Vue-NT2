@@ -1,5 +1,10 @@
 <template>
   <div :class="[ openModal ? 'is-active' : '', 'modal' ]">
+
+    <div :class="[getSpinnerClass()]">
+      <div class="loader is-loading"></div>
+    </div>
+
     <div class="modal-background"></div>
       <div class="modal-card">
         <div class="jumbotron">
@@ -143,16 +148,18 @@
                apellido: '',
                password : ''
           },
-          v: null         
+          v: null,
+          loading: false         
       }
     },
     methods: {
 
         async enviar() {
-            this.v.$touch()
+          this.v.$touch()
             if(!this.v.$invalid) {
+              this.loading = true;
               let form = this.formUser
-              this.$store.dispatch('registrarUserAxios', form)
+              this.$store.dispatch('registrarUserAxios', form).then(() => {this.loading = false})
               this.resetForm()
               this.v.$reset()
             }
@@ -170,6 +177,16 @@
           this.$store.commit('showSignupModal', false);
           this.$store.commit('isUserSignedUp', false);
         },
+
+        getSpinnerClass(){
+          let baseClass = "loader-wrapper "
+
+          if(this.loading){
+            return baseClass.concat("is-active");
+          } else {
+            return baseClass;
+          }
+        }
     },
     computed: {
       openModal () {
@@ -188,7 +205,7 @@
 
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
   .src-components-formularioVue {
 
   }
@@ -208,5 +225,31 @@
   pre {
     color: white;
   }
+
+  .loader-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+
+        .loader {
+            height: 80px;
+            width: 80px;
+        }
+
+    &.is-active {
+        opacity: 1;
+        z-index: 1;
+    }
+}
 
 </style>

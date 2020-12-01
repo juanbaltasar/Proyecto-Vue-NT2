@@ -2,15 +2,21 @@
   <div :class="[ openModal ? 'is-active' : '', 'modal' ]">
     <div class="modal-background"></div>
     <div class="modal-card">
+
       <header class="modal-card-head">
           <p v-if="!isUserLoggedIn" class="modal-card-title">{{ modalTitle }}</p>
           <p v-if="isUserLoggedIn" class="modal-card-title">{{ modalTitleLoggedIn }}</p>
           <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
+      
 
       <form @submit="checkForm">
         <section class="modal-card-body">
 
+        <div :class="[getSpinnerClass()]">
+          <div class="loader is-loading"></div>
+        </div>
+        
         <div v-if="mostrarError" class="notification is-danger">
               <button class="delete" @click="mostrarError = !mostrarError"></button>
                   {{mensajeError}}
@@ -92,6 +98,8 @@ export default {
       mensajeError: '',
       mostrarError: false,
 
+      loading: false,
+
     form: {
       email: '',
       password: ''
@@ -131,17 +139,7 @@ export default {
         this.highlightEmailWithError = false;
         this.highlightPasswordWithError = false;
 
-        let data = {
-          "username": this.form.email,
-          "password": this.form.password
-        }
-
-        this.$store.dispatch('getTokenUserAxios', data)
-          .catch(() => { 
-            this.mensajeError = "Usuario/Contraseña inválido!",
-            this.mostrarError = true
-          })
-      
+        this.logIn()
       }
 
       if (!this.form.email) {
@@ -158,18 +156,66 @@ export default {
 
       e.preventDefault();
     },
+    logIn(){
+      this.loading = true;
 
+       let data = {
+          "username": this.form.email,
+          "password": this.form.password
+        }
+
+        this.$store.dispatch('getTokenUserAxios', data)
+          .catch(() => { 
+            this.mensajeError = "Usuario/Contraseña inválido!",
+            this.mostrarError = true
+            this.loading = false;
+          }).then(() => {this.loading = false})
+    },
+    getSpinnerClass(){
+      let baseClass = "loader-wrapper "
+
+      if(this.loading){
+        return baseClass.concat("is-active");
+      } else {
+        return baseClass;
+      }
+    }
   }
 };
 </script>
 
-<style lang="scss">
-.fa-exclamation-circle {
-  color: red;
-}
-.fa-check {
-  color: green;
-}
+<style lang="scss" scoped>
+  .fa-exclamation-circle {
+    color: red;
+  }
+  .fa-check {
+    color: green;
+  }
+  .loader-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+
+        .loader {
+            height: 80px;
+            width: 80px;
+        }
+
+    &.is-active {
+        opacity: 1;
+        z-index: 1;
+    }
+  }
 </style>
 
 
