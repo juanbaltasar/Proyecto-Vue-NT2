@@ -9,6 +9,7 @@
                         </figure>
                     </div>
                 </div>
+            </div>
                 <div id="detail">
                     <div class="column is-offset-6">
                         <div class="card-content">
@@ -40,7 +41,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 

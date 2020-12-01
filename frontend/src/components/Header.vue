@@ -2,9 +2,11 @@
   <div>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div>
-        <router-link :to="{ name: 'inicio' }">
+         <!-- <router-link :to="{ name: 'inicio' }"> -->
+        <a href="/">
           <img src="../assets/logo_bar.png" alt="Ecommerce" width="200" height="100">
-        </router-link> 
+        </a>
+        <!-- </router-link>  -->
 
         <a role="button" class="navbar-burger burger" @click="isMenuOpen = !isMenuOpen" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
