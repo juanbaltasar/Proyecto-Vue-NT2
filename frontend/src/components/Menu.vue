@@ -20,16 +20,13 @@
 				</p>
 			</div>
 		</div>
-		<div v-if="isUserLoggedIn" class="navbar-link has-dropdown is-hoverable">
-			<a class="navbar-link">
-			Bienvenido {{ getUserName }}
+		<div v-if="isUserLoggedIn" class="navbar-item is-hoverable">
+			<span>
+				Bienvenido {{ getUserName }}
+			</span>
+			<a class="navbar-item" @click="logout">
+				{{ logoutLabel }}
 			</a>
-			<div class="navbar-dropdown is-boxed">
-				
-				<a class="navbar-item" @click="logout">
-					{{ logoutLabel }}
-				</a>
-			</div>
 		</div>
 	</div>
 </template>
@@ -64,7 +61,6 @@ export default {
 		logout () {
 			this.$store.commit('isUserLoggedIn', false);
 			this.$store.commit('isUserSignedUp', false);
-			this.$store.commit('removeProductsFromFavourite');
 
 			this.$router.push({ name: 'index' });
 		},
