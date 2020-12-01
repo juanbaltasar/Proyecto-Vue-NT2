@@ -78,6 +78,9 @@ export default {
       return prec
     }
   },
+  created () {
+      window.scrollTo(0, 0);
+  },
   mixins: [currency]
 }
 </script>
