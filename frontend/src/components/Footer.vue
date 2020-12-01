@@ -1,10 +1,10 @@
 <template>
   <div class="footer">
-    <div class="columns container">
+    <div class="columns">
       <div class="column">
         <p>TP Final NT2 - Prof. Daniel Sanchez</p>
       </div>
-    <div class="column has-text-right">
+    <div class="column is-pulled-right">
       <p>Ecommerce | <strong>ORT Argentina - 2°1°C</strong></p>
       <img src="../assets/stu.png" alt="Integrantes" width="35" height="35">
       <ul>
@@ -12,7 +12,7 @@
         <li>Brea, Julián</li>
         <li>Duran, Alan</li>
         <li>Escuder, Santiago</li>
-        <li>Fungueiro, Tom</li>
+        <li>Fungueiro, Tomás</li>
         <li>Martín, Juan Baltasar</li>
       </ul>
     </div>

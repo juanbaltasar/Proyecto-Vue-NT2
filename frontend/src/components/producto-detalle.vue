@@ -1,7 +1,7 @@
 <template>
     <div class="section">     
         <div class="card">
-            <!--<div class="columns">-->
+            <div class="columns">
                 <div class="column is-4">
                     <div class="card-img">
                         <figure class="image is-480x480" alt="Placeholder image">
@@ -34,11 +34,13 @@
                             <br/> 
                             <br/>
                             <br/>
+
+                            <hr>
                             <img class="banner" src="../assets/electro.jpg" alt="Electro" width="1000" height="1000">
                         </div>
                     </div>
                 </div>
-            <!--</div>-->
+            </div>
         </div>
     </div>
 
