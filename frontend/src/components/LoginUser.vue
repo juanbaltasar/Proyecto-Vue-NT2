@@ -7,8 +7,15 @@
           <p v-if="isUserLoggedIn" class="modal-card-title">{{ modalTitleLoggedIn }}</p>
           <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
+
       <form @submit="checkForm">
         <section class="modal-card-body">
+
+        <div v-if="mostrarError" class="notification is-danger">
+              <button class="delete" @click="mostrarError = !mostrarError"></button>
+                  {{mensajeError}}
+        </div>
+      
           <div v-if="!isUserLoggedIn">
             <div class="field">
               <p class="control has-icons-left has-icons-right">
@@ -50,8 +57,8 @@
           <div v-if="isUserLoggedIn" class="level">
             <div class="level-item has-text-centered">
               <div>
-                <p class="title">Welcome back!</p>
-                <p class="heading">Now you are logged in</p>
+                <p class="title">Bienvenido!</p>
+                <p class="heading">Ahora te encuentras logueado!</p>
               </div>
             </div>
           </div>
@@ -81,9 +88,9 @@ export default {
       highlightPasswordWithError: '',
       btnLoggedInLabel: 'Cerrar',
       emailPlaceholder: 'Email',
-    
-    // TODO modificar url para el sendDatos
-      url: '',
+
+      mensajeError: '',
+      mostrarError: false,
 
     form: {
       email: '',
@@ -123,8 +130,18 @@ export default {
       if (this.form.email && this.form.password) {
         this.highlightEmailWithError = false;
         this.highlightPasswordWithError = false;
-        //this.$store.commit('isUserLoggedIn', true);
-        this.enviar();
+
+        let data = {
+          "username": this.form.email,
+          "password": this.form.password
+        }
+
+        this.$store.dispatch('getTokenUserAxios', data)
+          .catch(() => { 
+            this.mensajeError = "Usuario/Contraseña inválido!",
+            this.mostrarError = true
+          })
+      
       }
 
       if (!this.form.email) {
@@ -142,27 +159,6 @@ export default {
       e.preventDefault();
     },
 
-    /* Submit del form */
-    async enviar() {
-        let form = this.form;
-        console.log(form);
-        await this.sendDatosFormAxios(form);
-        this.resetForm();
-    },
-
-    //delay : ms => new Promise(resolve => setTimeout(resolve, ms)),
-
-    /* Envio de datos del formularioVue al backend */
-        async sendDatosFormAxios(datos) {
-            try {
-              let res = await this.axios.post(this.url, datos, {'content-type': 'application/json'})
-              //await this.delay(100)
-              console.log(res.data)
-            }
-            catch(error) {
-              console.log('HTTP POST ERROR', error)
-            }
-        }
   }
 };
 </script>

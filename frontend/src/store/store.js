@@ -15,7 +15,8 @@ export default createStore({
         isSignedUp: false,
         hasSearched: false,
         name: '',
-        productTitleSearched: ''
+        productTitleSearched: '',
+        token: ''
       },
       systemInfo: {
         openLoginModal: false,
@@ -90,6 +91,19 @@ export default createStore({
           console.log('HTTP GET ERROR', error)
       }
     },
+    async getTokenUserAxios({commit}, user) {
+      return new Promise((resolve, reject) => {
+        axios.post(url + "users/auth", user, {'content-type':'application/json'})
+            .then(res => {
+                let usuario = res.data
+                  commit('setTokenUsuario',usuario)
+                  resolve("OK")
+            })
+            .catch(error => { 
+              reject(error.response.data.errors)
+            })
+        })
+    },
     anadirAlCarrito (context, productoId) {
       var producto = context.state.productos.find(item => item._id === productoId)
       if (producto.cantidad > 0) {
@@ -121,6 +135,11 @@ export default createStore({
   mutations: {
     setProductos (state, productos) {
       state.productos = productos
+    },
+    setTokenUsuario(state, usuario){
+      state.userInfo.name = usuario.name;
+      state.userInfo.token = usuario.token;
+      state.userInfo.isLoggedIn = true;
     },
     pushearAlCarrito (state, productoID) {
       state.carrito.push({

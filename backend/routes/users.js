@@ -37,7 +37,8 @@ router.post('/auth', async function (req, res, next) {
                       success: true,
                       message: 'Here´s your token.',
                       token: token,
-                      esAdministrador: user.esAdministrador
+                      esAdministrador: user.esAdministrador,
+                      name: user.username
                   });
 
               }else{
