@@ -26,7 +26,7 @@ export default createStore({
   },
   getters: {
     productosDisponibles (state) {
-      return state.productos.filter(producto => producto.stock > 0)
+      return state.productos.filter(producto => producto.cantidad > 0)
     },
     getCarritoProductos (state) {
       return state.carrito.map(cartItem => {
@@ -92,7 +92,7 @@ export default createStore({
     },
     anadirAlCarrito (context, productoId) {
       var producto = context.state.productos.find(item => item._id === productoId)
-      if (producto.stock > 0) {
+      if (producto.cantidad > 0) {
         const itemDelCarrito = context.state.carrito.find(item => item._id === producto._id)
         if (!itemDelCarrito) {
           context.commit('pushearAlCarrito', producto._id)
@@ -129,7 +129,7 @@ export default createStore({
       cartItem.cantidad++
     },
     decrementarStock (state, producto) {
-      producto.stock--
+      producto.cantidad--
     },
     setStatusCompra (state, status) {
       state.statusCompra = status

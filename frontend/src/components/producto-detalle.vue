@@ -30,10 +30,11 @@
                             <div v-if="modalConfirmar" class="notification is-info">
                                 <button class="delete" @click="modalConfirmar = !modalConfirmar"></button>
                                      {{confirmAddLabel}}
-                                </div>
+                            </div>
                             <br/> 
                             <br/>
-                            <img src="../assets/electro.jpg" alt="Electro" width="1000" height="1000">
+                            <br/>
+                            <img class="banner" src="../assets/electro.jpg" alt="Electro" width="1000" height="1000">
                         </div>
                     </div>
                 </div>
@@ -61,8 +62,8 @@ export default {
     }
   },
   methods: {
-    anadirAlCarrito (_id) {
-        this.$store.dispatch('anadirAlCarrito', _id)
+    anadirAlCarrito (id) {
+        this.$store.dispatch('anadirAlCarrito', id)
         this.modalConfirmar = true
     }
   },
@@ -84,19 +85,23 @@ export default {
     font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
     text-align: left;
   }
-  .image img {
-
-      width: 500px;
-      height: 200px;
+  
+   figure img {
+      max-height: 500px;
+      max-width: 400px;
   }
   
   #detail{
 
     text-align: left;
 }
+
+.banner {
+    padding-top: 50px;
+}
 .card-content {
     padding: -150px 15px 15px 0px;
-    margin-top: -230px;
+    margin-top: -400px;
     margin-left: -200px;
 
     &__text {
