@@ -1,9 +1,9 @@
 export const currency = {
   methods: {
     getCurrency (value){
-      var prec = value.toLocaleString('en-US', {
+      var prec = value.toLocaleString('es-CO', {
         style: 'currency',
-        currency: 'USD'
+        currency: 'COP'
       })
       return prec
     }

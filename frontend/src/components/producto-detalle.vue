@@ -22,7 +22,7 @@
                             <br/> 
                             <br/> 
                             <div class="card-content__price">
-                                <span class="title"><strong>$ {{ producto.precio }}</strong></span>
+                                <span class="title"><strong>{{getCurrency(producto.precio)}}</strong></span>
                             </div>
                             <div class="card-content__btn is-pulled-right">
                                 <button class="button is-primary" @click="anadirAlCarrito(producto._id)">{{ addToCartLabel }}</button>
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import {currency} from '../currency'
+
 export default {
   name: 'DetalleProducto',
   data() {
@@ -62,8 +64,8 @@ export default {
     }
   },
   methods: {
-    anadirAlCarrito (id) {
-        this.$store.dispatch('anadirAlCarrito', id)
+    anadirAlCarrito (_id) {
+        this.$store.dispatch('anadirAlCarrito', _id)
         this.modalConfirmar = true
     }
   },
@@ -75,7 +77,8 @@ export default {
       })
       return prec
     }
-  }
+  },
+  mixins: [currency]
 }
 </script>
 
